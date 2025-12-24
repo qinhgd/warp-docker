@@ -31,10 +31,10 @@ COPY --from=fetcher /tmp/usr/bin/warp-svc /usr/bin/warp-svc
 COPY --from=fetcher /tmp/usr/bin/warp-cli /usr/bin/warp-cli
 
 # 拷贝你的启动脚本
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint1.sh /entrypoint1.sh
 
 # 权限与用户设置
-RUN chmod +x /usr/bin/gost /usr/bin/warp-* /entrypoint.sh && \
+RUN chmod +x /usr/bin/gost /usr/bin/warp-* /entrypoint1.sh && \
     adduser -D -u 1000 warp && \
     echo "warp ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/warp
 
@@ -46,4 +46,4 @@ RUN mkdir -p /home/warp/.local/share/warp && echo -n 'yes' > /home/warp/.local/s
 ENV GOST_ARGS="-L socks5://:1080?udp=true"
 ENV WARP_SLEEP=2
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint1.sh"]
